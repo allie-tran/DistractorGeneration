@@ -106,13 +106,12 @@ def main():
         opt.skip_lines = 1
 
     embeddings_enc = get_embeddings(opt.emb_file_enc, opt, flag='enc')
-    embeddings_dec = get_embeddings(opt.emb_file_dec, opt, flag='dec')
-
+    # embeddings_dec = get_embeddings(opt.emb_file_dec, opt, flag='dec')
     filtered_enc_embeddings, enc_count = match_embeddings(enc_vocab,
                                                           embeddings_enc,
                                                           opt)
     filtered_dec_embeddings, dec_count = match_embeddings(dec_vocab,
-                                                          embeddings_dec,
+                                                          embeddings_enc,  # embeddings_dec
                                                           opt)
     logger.info("\nMatching: ")
     match_percent = [_['match'] / (_['match'] + _['miss']) * 100

@@ -16,7 +16,7 @@ from onmt.inputters.dataset_base import (DatasetBase, UNK_WORD,
 from onmt.utils.misc import aeq
 from onmt.utils.logging import logger
 
-
+from pprint import pprint
 class TextDataset(DatasetBase):
     """ Dataset for data_type=='text'
 
@@ -154,7 +154,7 @@ class TextDataset(DatasetBase):
     def make_examples(text_iter, truncate):
         for i, line in enumerate(text_iter):
             ex = json.loads(line)
-
+            # pprint(ex)
             src_words, src_feats, src_n_feats = \
                 TextDataset.extract_text_features(ex['sent'], 'src')
             ans_words, ans_feats, ans_n_feats = \
@@ -227,7 +227,3 @@ class TextDataset(DatasetBase):
             ex = json.loads(cf.readline())
             _, _, num_feats = TextDataset.extract_text_features(ex[side], side)
         return num_feats
-
-
-
-

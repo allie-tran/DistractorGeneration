@@ -377,8 +377,8 @@ def translate_opts(parser):
                                            query: p <q> q <a> a <q> q <a> a <a>, current_answer,
                                            hier: p, q..., a..., current_answer,
                                         """)
-    group.add_argument('-data', required=True,
-                       help="""Path prefix to the "-test.json" 
+    group.add_argument('-data', required=False,
+                       help="""Path prefix to the "-test.json"
                        file path from preprocess.py""")
 
     group.add_argument('-output', default='pred.txt',

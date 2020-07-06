@@ -16,12 +16,12 @@ python -u train_single.py \
         -lambda_question=0.5 \
         -lambda_answer=-1 \
         -data=data/processed \
-        -save_model=data/model/${DATE}_${MODEL} \
+        -save_model=/mnt/DATA/tlduyen/LQA/data/model/${DATE}_${MODEL} \
         -save_checkpoint_steps=3000 \
         -gpuid=0 \
         -pre_word_vecs_enc=data/processed.glove.enc.pt \
         -pre_word_vecs_dec=data/processed.glove.dec.pt \
-        -batch_size=32 \
+        -batch_size=16 \
         -valid_steps=3000 \
         -valid_batch_size=16 \
         -train_steps=45000 \
@@ -33,4 +33,3 @@ python -u train_single.py \
         -decay_steps=3000 \
         -seed=1995 \
         -report_every=300
-

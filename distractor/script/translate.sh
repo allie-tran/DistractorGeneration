@@ -1,14 +1,11 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bashmnt/
 
-PROJ=/path/to/Distractor-Generation-RACE
-
-export CUDA_VISIBLE_DEVICES=$1
-FULL_MODEL_NAME=$2
+export CUDA_VISIBLE_DEVICES=0,1
 
 python -u translate.py \
-    -model=${PROJ}/data/model/${FULL_MODEL_NAME}.pt \
-    -data=${PROJ}/data/race_test.json \
-    -output=${PROJ}/data/pred/${FULL_MODEL_NAME}.txt \
+    -model=/mnt/DATA/tlduyen/LQA/data/model/jul2_model_step_45000.pt \
+    -data=data/race_test_updated.json \
+    -output=data/pred/jul2_model_step_45000.txt \
     -share_vocab \
     -block_ngram_repeat=1 \
     -replace_unk \
