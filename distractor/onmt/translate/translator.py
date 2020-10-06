@@ -44,8 +44,6 @@ def build_translator(opt, report_score=True, logger=None, out_file=None):
                         "ignore_when_blocking", "dump_beam", "report_bleu",
                         "data_type", "replace_unk", "gpu", "verbose", "fast",
                         ]}
-    pprint.pprint(kwargs)
-    pprint.pprint(fields)
     translator = Translator(model, fields, global_scorer=scorer,
                             out_file=out_file, gold_file=opt.target,
                             report_score=report_score,
@@ -172,7 +170,7 @@ class Translator(object):
                           data_path=data_path,
                           use_filter_pred=self.use_filter_pred)
         if self.cuda:
-            cur_device = "cuda"
+            cur_device = f"cuda:{self.gpu}"
         else:
             cur_device = "cpu"
 
@@ -181,7 +179,7 @@ class Translator(object):
             return len(ex.src)
         # data.fields = self.fields
         data_iter = torchtext.data.Iterator(dataset=data,
-                                            batch_size=1,
+                                            batch_size=batch_size,
                                             device=cur_device,
                                             train=False, sort=False,
                                             sort_key=sort_key,
@@ -195,11 +193,10 @@ class Translator(object):
 
         # Statistics
         translated = []
-        for batch in tqdm(data_iter):
+        for batch in data_iter:
             batch_data = self.translate_batch(batch, data)
             translations = builder.from_batch(batch_data)
             translated.extend(translations)
-            break
         return translated
 
 
